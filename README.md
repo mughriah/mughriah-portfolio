@@ -16,12 +16,3 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
    - Error handling and input validation.
    - Readability and Maintainability of the code.
 
-### Project 2: [Project Title 2]
-
-- **Description:** Developed a project description using Java for algorithm development and HTML, CSS, JavaScript for creating the web interface.
-- **Technologies Used:** Java, HTML, CSS, JavaScript
-
-### Project 3: [Project Title 3]
-
-- **Description:** Built a project description using Java and MongoDB for data handling.
-- **Technologies Used:** Java, MongoDB
