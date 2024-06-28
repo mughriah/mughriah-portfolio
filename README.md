@@ -18,3 +18,27 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
    - Error handling and input validation.
    - Readability and Maintainability of the code.
 
+### Project 3: Tic-Tac-Toe Game
+
+- **DESCRIPTION:** 
+- **TECHNOLOGY USED:** 
+- **COLLABORATION:** 
+- **YEAR LEVEL:** 
+  
+- **IMPROVEMENTS:**
+
+  ### Project 2: 
+
+- **DESCRIPTION:** The Tic-Tac-Toe game has a two players that take turns placing their markers on a 3x3 board. Players aim to form a horizontal, vertical, or diagonal line with their markers to win the game. The program includes functions for validating moves, tracking game progress, and determining the winner after each move. It provides a basic yet engaging simulation of this timeless strategy game.
+- **TECHNOLOGY USED:** C Language
+- **COLLABORATION:** Group of 3
+- **ROLE:** Translator of the specification system and Developer
+- **YEAR LEVEL:** First Year
+  
+- **IMPROVEMENTS:**
+    - Implement a Graphical User Interface (GUI) to enhance the user's experience.
+    - Input Validations
+    - Modularization and Code Organization
+    - Code Refactoring and Readability.
+  
+
