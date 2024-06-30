@@ -18,7 +18,7 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
    - Error handling and input validation.
    - Readability and Maintainability of the code.
 
-### Project 2: 
+### Project 2: Vaccination Registration
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
 - **COLLABORATION:** 
@@ -40,4 +40,42 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
     - Modularization and Code Organization
     - Code Refactoring and Readability.
   
+### Project 4: Room Registration
+- **DESCRIPTION:** 
+- **TECHNOLOGY USED:** 
+- **COLLABORATION:** 
+- **YEAR LEVEL:** 
+  
+- **IMPROVEMENTS:**
 
+### Project 5: DSTRU 2
+- **DESCRIPTION:** 
+- **TECHNOLOGY USED:** 
+- **COLLABORATION:** 
+- **YEAR LEVEL:** 
+  
+- **IMPROVEMENTS:**
+
+### Project 6: Restaurant Reservation
+- **DESCRIPTION:** 
+- **TECHNOLOGY USED:** 
+- **COLLABORATION:** 
+- **YEAR LEVEL:** 
+  
+- **IMPROVEMENTS:**
+
+### Project 7: Pokemon Game
+- **DESCRIPTION:** 
+- **TECHNOLOGY USED:** 
+- **COLLABORATION:** 
+- **YEAR LEVEL:** 
+  
+- **IMPROVEMENTS:**
+
+### Project 8: Project GALA's Website
+- **DESCRIPTION:** 
+- **TECHNOLOGY USED:** 
+- **COLLABORATION:** 
+- **YEAR LEVEL:** 
+  
+- **IMPROVEMENTS:**
