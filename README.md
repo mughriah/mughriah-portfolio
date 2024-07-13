@@ -39,8 +39,16 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
     - Input Validations
     - Modularization and Code Organization
     - Code Refactoring and Readability.
+
+### Project 4: Vaccine Registration
+- **DESCRIPTION:** 
+- **TECHNOLOGY USED:** 
+- **COLLABORATION:** 
+- **YEAR LEVEL:** 
   
-### Project 4: Room Registration
+- **IMPROVEMENTS:**
+  
+### Project 5: Room Registration
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
 - **COLLABORATION:** 
@@ -48,7 +56,7 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
   
 - **IMPROVEMENTS:**
 
-### Project 5: DSTRU 2
+### Project 6: DSTRU 2
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
 - **COLLABORATION:** 
@@ -56,7 +64,7 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
   
 - **IMPROVEMENTS:**
 
-### Project 6: Restaurant Reservation
+### Project 7: Restaurant Reservation
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
 - **COLLABORATION:** 
@@ -64,7 +72,7 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
   
 - **IMPROVEMENTS:**
 
-### Project 7: Pokemon Game
+### Project 8: Pokemon Game
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
 - **COLLABORATION:** 
@@ -72,7 +80,7 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
   
 - **IMPROVEMENTS:**
 
-### Project 8: Project GALA's Website
+### Project 9: Project GALA's Website
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
 - **COLLABORATION:** 
