@@ -77,15 +77,15 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
     - Extended Game Rules
     - Save/Load Feature
     - Network Play
-
-### Project 6: Restaurant Reservation
+      
+### Project 6: Music School Management System
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
 - **COLLABORATION:** 
 - **YEAR LEVEL:** 
   
 - **IMPROVEMENTS:**
-
+- 
 ### Project 7: Pokemon Game
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
@@ -94,7 +94,15 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
   
 - **IMPROVEMENTS:**
 
-### Project 8: Project GALA's Website
+### Project 8: 
+- **DESCRIPTION:** 
+- **TECHNOLOGY USED:** 
+- **COLLABORATION:** 
+- **YEAR LEVEL:** 
+  
+- **IMPROVEMENTS:**
+
+### Project 9: Project GALA's Website
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
 - **COLLABORATION:** 
