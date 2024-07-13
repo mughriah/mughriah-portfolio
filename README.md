@@ -19,19 +19,27 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
    - Readability and Maintainability of the code.
 
 ### Project 2: Vaccination Registration
-- **DESCRIPTION:** 
-- **TECHNOLOGY USED:** 
-- **COLLABORATION:** 
-- **YEAR LEVEL:** 
+- **DESCRIPTION:** This project is designed to facilitate the registration and appointment scheduling for vaccination programs. It allows users to register their details, including vaccination history, and schedule appointments for vaccination. The system verifies user information, manages appointment scheduling, and provides a chatbot interface for user queries related to vaccination.
+- **TECHNOLOGY USED:** C Language
+- **COLLABORATION:** Pair
+- **ROLE:** Programmer
+- **YEAR LEVEL:** First Year
   
 - **IMPROVEMENTS:**
+    - Implement a Graphical User Interface (GUI) to enhance the user's experience.
+    - Input Validations
+    - Database Integration
+    - Security Measures
+    - Extensibility
+    - Modularization and Code Organization
+    - Code Refactoring and Readability. 
 
 ### Project 3: Tic-Tac-Toe Game
 
 - **DESCRIPTION:** The Tic-Tac-Toe game has a two players that take turns placing their markers on a 3x3 board. Players aim to form a horizontal, vertical, or diagonal line with their markers to win the game. The program includes functions for validating moves, tracking game progress, and determining the winner after each move. It provides a basic yet engaging simulation of this timeless strategy game.
 - **TECHNOLOGY USED:** C Language
 - **COLLABORATION:** Group of 3
-- **ROLE:** Translator of the specification system and Developer
+- **ROLE:** Translator of the specification system and Programmer
 - **YEAR LEVEL:** First Year
   
 - **IMPROVEMENTS:**
@@ -41,13 +49,20 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
     - Code Refactoring and Readability.
   
 ### Project 4: Room Registration
-- **DESCRIPTION:** 
-- **TECHNOLOGY USED:** 
-- **COLLABORATION:** 
-- **YEAR LEVEL:** 
+- **DESCRIPTION:** This project involves developing a room registration system that allows users to make, edit, cancel, and view reservations for conference rooms. The system includes functionality for both users and administrators. Users can make reservations, edit existing ones, and cancel reservations, while administrators can add new rooms, view available rooms, mark reservations as complete, and delete rooms.
+- **TECHNOLOGY USED:** C Language
+- **COLLABORATION:** Solo
+- **YEAR LEVEL:** Second Year
   
 - **IMPROVEMENTS:**
-
+    - Implement a Graphical User Interface (GUI) to enhance the user's experience.
+    - Input Validations
+    - Modularization and Code Organization
+    - Code Refactoring and Readability.
+    - File Handling
+    - Date Handling
+    - User Authentication
+      
 ### Project 5: DSTRU 2
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
