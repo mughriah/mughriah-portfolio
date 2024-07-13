@@ -79,13 +79,18 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
     - Network Play
       
 ### Project 6: Music School Management System
-- **DESCRIPTION:** 
-- **TECHNOLOGY USED:** 
-- **COLLABORATION:** 
-- **YEAR LEVEL:** 
+- **DESCRIPTION:** A comprehensive system designed to manage various aspects of a music school, including instrument inventory, student waitlists, instrument borrowing, and user accounts. The system facilitates the organization and tracking of musical instruments, student information, and borrowing activities, providing a streamlined and efficient approach to music school management.
+- **TECHNOLOGY USED:** MySQL, Java, HTML, CSS, JavaScript
+- **COLLABORATION:** Group of 4
+- **ROLE:** Design of the Site, Making and Checking of the DBScript and Programmer
+- **YEAR LEVEL:** Second Year
   
 - **IMPROVEMENTS:**
-- 
+    - User Authentication and Authorization
+    - Enhanced USer Interface
+    - Automated Notifications
+    - Comprehensive Reporting
+  
 ### Project 7: Pokemon Game
 - **DESCRIPTION:** 
 - **TECHNOLOGY USED:** 
