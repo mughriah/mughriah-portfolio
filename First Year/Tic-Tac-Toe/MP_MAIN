@@ -1,0 +1,79 @@
+#include "MP_FUNCTIONS.c"
+
+int main ()
+{
+	int COUNT = 0, COUNT2 = 0, COUNT3 = 0, TOTALGAMES = 0;
+	int A[10], S[3][3][2], V[2] = {TRUE, FALSE}, F[6][3][2], P[9]; 
+	SetAType T, M, B, L, C, R; // Applicable sets with the cartesian product of A 
+	struct PlayerTag PLAYER[2];
+	bool GAMEFLAG = 0;
+	
+	for (COUNT = 0; COUNT < 3; COUNT++)
+	{
+		A[COUNT] = COUNT+1; // Set A Initialization
+	}
+
+	COUNT = 0;
+	
+	for (COUNT = 0; COUNT < 3; COUNT++)
+	{
+		for (COUNT2 = 0; COUNT2 < 3; COUNT2++)
+		{	
+			for (COUNT3 = 0; COUNT3 < 2; COUNT3++)
+			{			
+				if (COUNT3 == 0)
+					S[COUNT][COUNT2][COUNT3] = A[COUNT]; // Set S Initialization - Row Coordinates
+				else
+					S[COUNT][COUNT2][COUNT3] = A[COUNT2]; // Column Coordinates
+			}
+		}
+	}
+	
+	COUNT = 0; COUNT2 = 0; COUNT3 = 0;
+	
+	SetATypeInit (T,A,1,1); // Set T {1} X A
+	SetATypeInit (M,A,2,1); // Set M {2} X A
+	SetATypeInit (B,A,3,1); // Set B {3} X A
+	SetATypeInit (L,A,1,2); // Set L A X {1}
+	SetATypeInit (C,A,2,2); // Set C A X {2}
+	SetATypeInit (R,A,3,2);	// Set R A X {3}
+
+	
+	for (COUNT = 0; COUNT < 6; COUNT++)
+	{
+		for (COUNT2 = 0; COUNT2 < 3; COUNT2++)
+		{
+			for (COUNT3 = 0; COUNT3 < 2; COUNT3++)
+			{
+				if (COUNT < 3) // Set F Initialization - Horizontal Positions 
+					F[COUNT][COUNT2][COUNT3] = S[COUNT][COUNT2][COUNT3]; 
+				// Set F - Vertical Positions 
+				else if (COUNT == 3)
+					F[COUNT][COUNT2][COUNT3] = L[COUNT2][COUNT3]; 
+				else if (COUNT == 4)
+					F[COUNT][COUNT2][COUNT3] = C[COUNT2][COUNT3]; 
+				else if (COUNT == 5)
+					F[COUNT][COUNT2][COUNT3] = R[COUNT2][COUNT3];
+			}
+		}
+	}
+	
+	COUNT = 0;
+	
+	for (COUNT = 0; COUNT < 9; COUNT++)
+	{
+		P[COUNT] = COUNT+1; // Set P Initialization
+	}
+	
+	COUNT = 0;
+	// Player names initialization	
+	PLAYER[0].NAME = 'A';
+	PLAYER[1].NAME = 'B';
+	
+	do {
+		TOTALGAMES++;
+		GAMEFLAG = MainGame(PLAYER, S, A, P, F, T, M, B, L, C, R, V, TOTALGAMES); // The main game function
+	} while (GAMEFLAG == FALSE); // Loops until a player wins the game
+	
+	return 0;
+}
