@@ -1,0 +1,460 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define FALSE 0
+#define TRUE 1
+#define BOARD_SIZE 3
+
+typedef int SetAType[3][2];
+
+struct PlayerTag
+{
+	char NAME;
+	int MOVES;
+	int PLAYERPEGS[9];
+	int PEGINDEX;
+	int POSINDEX;
+	int WINCON;
+};
+
+// Source code built by Joehanna Cansino, Mary Faye Caya, and John Uriel Dela Cruz
+// CCDSTRU S27 Term 2 A.Y. 2022 - 2023
+
+void SetATypeInit (SetAType set, int A[], int SetNum, int SetType) // initializes Set T, M, B, L, C, R
+{
+	int COUNT = 0, COUNT2 = 0;
+
+	for (COUNT = 0; COUNT < 3; COUNT++)
+	{
+		for (COUNT2 = 0; COUNT2 < 2; COUNT2++)
+		{
+			if (COUNT2 == 0 && SetType == 1) // T, M, B Row Coordinates
+				set[COUNT][COUNT2] = SetNum;
+			else if (COUNT2 == 0 && SetType == 2) // L, C, R Row Coordinates
+				set[COUNT][COUNT2] = A[COUNT];
+			else if (COUNT2 > 0 && SetType == 1) // T, M, B Col Coordinates
+				set[COUNT][COUNT2] = A[COUNT];
+			else if (COUNT2 > 0 && SetType == 2) // L, C, R Row Coordinates
+				set[COUNT][COUNT2] = SetNum;
+		}
+	}
+}
+
+void printBoard(int BOARD[][3])
+{
+	int i = 0, j = 0;
+	
+    for ( i = 0; i < 3; i++)
+	{
+        for ( j = 0; j < 3; j++)
+		{
+			printf(" %d",BOARD[i][j]);
+			
+			if(j < 2)
+				printf(" |");
+		}
+		
+		printf("\n");
+		
+		if(i < 2)
+			printf("---+---+---\n");
+	}
+}
+
+int LineFormed (struct PlayerTag *PLAYER, int BOARD[][3], int ROW, int COL, int TYPE)
+{
+	int COUNT = 0, ROWSUM = 0, ROWFLAG = 0, COLSUM = 0, COLFLAG = 0;
+	
+	for (COUNT = 0; COUNT < PLAYER->PEGINDEX && ROWFLAG < 3 && COLFLAG < 3; COUNT++)
+	{
+		if (TYPE == 1) // Checks the given row if the player's numbers could be found
+		{
+			if (BOARD[ROW][0] == PLAYER->PLAYERPEGS[COUNT])
+			{
+				ROWFLAG++;
+				ROWSUM += BOARD[ROW][0];
+			}
+			else if (BOARD[ROW][1] == PLAYER->PLAYERPEGS[COUNT])
+			{
+				ROWFLAG++;
+				ROWSUM += BOARD[ROW][1];
+			}
+			else if (BOARD[ROW][2] == PLAYER->PLAYERPEGS[COUNT])
+			{
+				ROWFLAG++;
+				ROWSUM += BOARD[ROW][2];
+			}
+		}
+		else if (TYPE == 2) // Checks the given column if the player's numbers could be found
+		{
+			if (BOARD[0][COL] == PLAYER->PLAYERPEGS[COUNT])
+			{
+				COLFLAG++;
+				COLSUM += BOARD[0][COL];
+			}
+			else if (BOARD[1][COL] == PLAYER->PLAYERPEGS[COUNT])
+			{
+				COLFLAG++;
+				COLSUM += BOARD[1][COL];
+			}
+			else if (BOARD[2][COL] == PLAYER->PLAYERPEGS[COUNT])
+			{
+				COLFLAG++;
+				COLSUM += BOARD[2][COL];
+			}
+		}
+	}
+	
+	if (TYPE == 1 && ROWFLAG == 3) // If the numbers form a horizontal line, 
+		return ROWSUM; // Returns the sum of that line
+	else if (TYPE == 2 && COLFLAG == 3) // If the numbers form a vertical line
+		return COLSUM;	// Returns the sum of that line
+	else
+		return FALSE; // Otherwise, return false
+}
+
+int LineCheck (struct PlayerTag *PLAYER, int BOARD[][3])
+{
+	int LINEFLAG = 0;
+	// Checks if a player formed a line. Returns the sum of a line if found, else returns false
+	if ((LINEFLAG = LineFormed(PLAYER,BOARD,0,0,1)) > 0)
+		return LINEFLAG;
+	else if ((LINEFLAG = LineFormed(PLAYER,BOARD,1,0,1)) > 0)
+		return LINEFLAG;
+	else if ((LINEFLAG = LineFormed(PLAYER,BOARD,2,0,1)) > 0)
+		return LINEFLAG;
+	else if ((LINEFLAG = LineFormed(PLAYER,BOARD,0,0,2)) > 0)
+		return LINEFLAG;
+	else if ((LINEFLAG = LineFormed(PLAYER,BOARD,0,1,2)) > 0)
+		return LINEFLAG;
+	else if ((LINEFLAG = LineFormed(PLAYER,BOARD,0,2,2)) > 0)
+		return LINEFLAG;
+	else
+		return FALSE;
+}
+
+int isPegValid (int PEG, int P[], int ONE[], int TWO[], int THREE[],int FOUR[], int FIVE[], int SIX[])
+{
+	int COUNT = 0;
+	bool PEGFLAG = FALSE, SETFLAG = FALSE;
+	
+	while (COUNT < 9) // Checks if the peg is in Set P
+	{
+		if (P[COUNT] == PEG)
+			PEGFLAG = TRUE;
+		
+		if (COUNT < 6) // Checks if the peg are found in the sets and is unique
+		{
+			if (ONE[COUNT] == PEG || TWO[COUNT] == PEG || THREE[COUNT] == PEG || FOUR[COUNT] == PEG || FIVE[COUNT] == PEG || SIX[COUNT] == PEG)
+				SETFLAG = TRUE;
+		}
+		
+		COUNT++;
+	}
+	
+	if (PEGFLAG == TRUE && SETFLAG == FALSE) // Returns true if the peg is valid and unique
+		return TRUE;
+	else 
+		return FALSE;
+}
+
+void AppSet (int PEG, int ROW, int COL, SetAType APPSET, int SET[], int *SETIDX)
+{
+	int COUNT = 0;
+	bool SETFLAG = FALSE;
+	
+	for (COUNT = 0; COUNT < 3; COUNT++) // Checks if the position of the peg is the same as the applicable set on the calling function
+	{
+		if (APPSET[COUNT][0] == ROW && APPSET[COUNT][1] == COL)
+		{
+			SETFLAG = TRUE;
+		}
+	}
+	
+	if (SETFLAG == TRUE) 
+	{
+		SET[*SETIDX] = PEG; // Assigns the peg on a set based on its position if the condition above is true
+		*SETIDX += 1; // Increments the index of the given set
+	}
+}
+
+void SetAssignment (int PEG, int ROW, int COL, int ONE[], int TWO[], int THREE[],int FOUR[], int FIVE[],int SIX[], 
+					SetAType T, SetAType M, SetAType B, SetAType L, SetAType C, SetAType R, 
+					int *ONEIDX, int *TWOIDX, int *THREEIDX, int *FOURIDX, int *FIVEIDX, int *SIXIDX)
+{
+	// Assigns the pegs to a set based on their position
+	AppSet(PEG, ROW, COL, T, ONE, ONEIDX);
+	AppSet(PEG, ROW, COL, M, TWO, TWOIDX);
+	AppSet(PEG, ROW, COL, B, THREE, THREEIDX);
+	AppSet(PEG, ROW, COL, L, FOUR, FOURIDX);
+	AppSet(PEG, ROW, COL, C, FIVE, FIVEIDX);
+	AppSet(PEG, ROW, COL, R, SIX, SIXIDX);
+}
+
+int isPosValid (int ROW, int COL, int A[], int BOARD[][3], int OCC[][2])
+{
+	int COUNT = 0; 
+	bool ROWFLAG = FALSE, COLFLAG = FALSE, OCCFLAG = FALSE;
+	
+	for (COUNT = 0; COUNT < 3; COUNT++) // Checks if row and col is valid (found in Set A)
+	{
+		if (A[COUNT] == ROW)
+			ROWFLAG = TRUE;
+		if (A[COUNT] == COL)
+			COLFLAG = TRUE;
+	}
+	
+	if (ROWFLAG == FALSE && COLFLAG == FALSE)
+		printf("\n\t[SYSTEM MESSAGE] INVALID ROW AND COLUMN NUMBERS: PLEASE TRY AGAIN\n\n");
+	if (ROWFLAG == FALSE && COLFLAG == TRUE)
+		printf("\n\t[SYSTEM MESSAGE] INVALID ROW NUMBER: PLEASE TRY AGAIN\n\n");
+	if (ROWFLAG == TRUE && COLFLAG == FALSE)
+		printf("\n\t[SYSTEM MESSAGE] INVALID COLUMN NUMBER: PLEASE TRY AGAIN\n\n");
+			
+	COUNT = 0;	
+		
+	for (COUNT = 0; COUNT < 6; COUNT++)
+	{
+		if (OCC[COUNT][0] == ROW && OCC[COUNT][1] == COL) // Checks if the position is occupied
+			OCCFLAG = TRUE;
+	}
+	
+	if (OCCFLAG == TRUE)
+		printf("\n\t[SYSTEM MESSAGE] POSITION ALREADY OCCUPIED: PLEASE TRY AGAIN\n");
+	
+	if (ROWFLAG == TRUE && COLFLAG == TRUE && OCCFLAG == FALSE)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+int MainGame (struct PlayerTag PLAYER[],int S[][3][2], int A[], int P[], int F[][3][2],
+				SetAType T, SetAType M, SetAType B, SetAType L, SetAType C, SetAType R, int V[], int TOTALGAME)
+{
+	int BOARD[3][3], OCC[9][2], ONE[6], TWO[6], THREE[6], FOUR[6], FIVE[6], SIX[6];
+	int ONEIDX = 0, TWOIDX = 0, THREEIDX = 0, FOURIDX = 0, FIVEIDX = 0, SIXIDX = 0; 
+	int TURN = 0, COUNT = 0, COUNT2 = 0, PEG = 0, ROW, COL;
+	int OCCINDEX = 0, TOTALMOVES = 0, LINEFLAG; 
+	bool AWINS = FALSE, BWINS = FALSE, RESULT[2] = {AWINS, BWINS}, OVER = FALSE, ROWCOLFLAG = FALSE, PEGFLAG = FALSE;
+	
+	PLAYER[0].MOVES = 0; PLAYER[0].PEGINDEX = 0; PLAYER[0].POSINDEX = 0; // Initializes the players' moves, peg index and position index to 0
+	PLAYER[1].MOVES = 0; PLAYER[1].PEGINDEX = 0; PLAYER[1].POSINDEX = 0;
+ 	
+	for (COUNT = 0; COUNT < 3; COUNT++)
+	{
+		for (COUNT2 = 0; COUNT2 < 3; COUNT2++)
+		{
+			BOARD[COUNT][COUNT2] = 0; // Initializes the board 0
+		}
+	}
+
+	COUNT = 0; COUNT2  = 0;
+	
+	for (COUNT = 0; COUNT < 9; COUNT++)
+	{
+		if (COUNT < 6) // Initializes sets to 0
+		{
+			ONE[COUNT] = 0;
+			TWO[COUNT] = 0;
+			THREE[COUNT] = 0;
+			FOUR[COUNT] = 0;
+			FIVE[COUNT] = 0;
+			SIX[COUNT] = 0;
+		}
+		
+		OCC[COUNT][0] = 0; // Initializes the occupied positions to 0
+		OCC[COUNT][1] = 0;
+	}
+	
+	COUNT = 0;
+	
+	do
+	{
+		if (TOTALGAME % 2 == 1) // If it's the first game and the number of total games are odd, player A will be the first player
+		{
+			for (TURN = 0; TURN < 2 && OVER == FALSE; TURN++) // Switches players per turn
+			{
+				printf("\n\t\t\tPLAYER %c'S TURN\n",PLAYER[TURN].NAME);
+				printf("\n------------------------------------------------------------------------\n");
+				do 
+				{
+					printf("\n\tAVAILABLE NUMBERS:"); // Shows the available numbers
+					for (COUNT = 0; COUNT < 9; COUNT++)
+					{
+						if (isPegValid(P[COUNT], P, ONE, TWO, THREE, FOUR, FIVE, SIX) == TRUE)
+							printf(" %d ",P[COUNT]);
+					}
+					
+					printf("\n\nENTER YOUR CHOSEN NUMBER: ");
+					scanf("%d",&PEG);
+					
+					PEGFLAG = isPegValid(PEG, P, ONE, TWO, THREE, FOUR, FIVE, SIX);
+					
+					printf("\nENTER ROW NUMBER: ");
+					scanf("%d",&ROW);
+					printf("\nENTER COLUMN NUMBER: ");
+					scanf("%d",&COL);
+									
+					ROWCOLFLAG = isPosValid(ROW, COL, A, BOARD, OCC);	
+					
+					if (PEGFLAG == FALSE)
+						printf("\n\t[SYSTEM MESSAGE] INVALID NUMBER AND/OR NUMBER ALREADY CHOSEN: PLEASE TRY AGAIN\n");	
+									
+				}while (PEGFLAG == FALSE || ROWCOLFLAG == FALSE); // Loops until the player inputs all valid values
+				
+				printf("\n");
+			
+				BOARD[ROW-1][COL-1] = PEG; // Assigns the peg to the board
+				
+				SetAssignment(PEG, ROW, COL, ONE, TWO, THREE, FOUR, FIVE, SIX, T, M, B, L, C, R, &ONEIDX, &TWOIDX, &THREEIDX, &FOURIDX, &FIVEIDX, &SIXIDX);
+				
+				printBoard(BOARD);
+				
+				OCC[OCCINDEX][0] = ROW; // Adds the position coordinates to the set OCC
+				OCC[OCCINDEX][1] = COL;
+				OCCINDEX++; // Increments the index of the occ set
+				
+				PLAYER[TURN].PLAYERPEGS[PLAYER[TURN].PEGINDEX] = PEG; // Adds the position coordinates to the set of the player's occupied positions
+				PLAYER[TURN].PEGINDEX++; // Increments the index of the set of the player's pegs
+				
+				PLAYER[TURN].MOVES++; // Increments the moves of the player
+				TOTALMOVES++; // Increments the total moves in the game
+				
+				if (PLAYER[TURN].MOVES >= 3) // Checks if the player formed a line after finishing their moves
+				{
+					LINEFLAG = LineCheck(&PLAYER[TURN], BOARD); // Returns zero if a line wasn't formed, otherwise return an integer greater than 0
+				}
+				
+				if (LINEFLAG == 15) // If a line was formed and the sum of the player's numbers are equals to 15
+				{
+					RESULT[TURN] = TRUE; // The player wins
+				}
+				
+				if (TOTALMOVES == 9) // If all of the players have filled the board
+				{
+					OVER = TRUE; // The game ends
+					
+					if (RESULT[TURN] == TRUE)
+					{
+						printf("\n\t*****[GAME OVER] PLAYER %c WINS THE GAME*****\n",PLAYER[TURN].NAME);
+					}
+					else if (LINEFLAG < 15 && LINEFLAG > 0) // If a line was formed but the sum of the player's numbers are less than 15
+					{
+						if (PLAYER[TURN].NAME == 'A') // The opponent wins
+						{
+							RESULT[1] = TRUE;
+							printf("\n\t*****[GAME OVER] PLAYER B WINS THE GAME*****\n");
+						}
+						else if (PLAYER[TURN].NAME == 'B')
+						{
+							RESULT[0] = TRUE;
+							printf("\n\t\t*****[GAME OVER] PLAYER A WINS THE GAME*****\n");
+						}
+					}
+					else if (LINEFLAG == 0 || LINEFLAG > 15) // If both players' numbers didn't form a line
+					{
+						printf("\n\t\t*****[GAME OVER] NO PLAYER WON THE GAME: GAME RESTARTING*****\n"); // Restarts the game
+					}
+				}
+					
+				printf("\n------------------------------------------------------------------------\n");
+			}
+		}
+		else // If it's the second game and the number of total games are even, player B will be the first player
+		{
+			for (TURN = 1; TURN >= 0 && OVER == FALSE; TURN--) // Switches players per turn
+			{
+				printf("\n\t\t\tPLAYER %c'S TURN\n",PLAYER[TURN].NAME);
+				printf("\n------------------------------------------------------------------------\n");
+				do 
+				{
+					printf("\n\tAVAILABLE NUMBERS:"); // Shows the available numbers
+					for (COUNT = 0; COUNT < 9; COUNT++)
+					{
+						if (isPegValid(P[COUNT], P, ONE, TWO, THREE, FOUR, FIVE, SIX) == TRUE)
+							printf(" %d ",P[COUNT]);
+					}
+					
+					printf("\n\nENTER YOUR CHOSEN NUMBER: ");
+					scanf("%d",&PEG);
+					
+					PEGFLAG = isPegValid(PEG, P, ONE, TWO, THREE, FOUR, FIVE, SIX);
+					
+					printf("\nENTER ROW NUMBER: ");
+					scanf("%d",&ROW);
+					printf("\nENTER COLUMN NUMBER: ");
+					scanf("%d",&COL);
+									
+					ROWCOLFLAG = isPosValid(ROW, COL, A, BOARD, OCC);	
+					
+					if (PEGFLAG == FALSE)
+						printf("\n\t[SYSTEM MESSAGE] INVALID NUMBER AND/OR NUMBER ALREADY CHOSEN: PLEASE TRY AGAIN\n");	
+									
+				}while (PEGFLAG == FALSE || ROWCOLFLAG == FALSE); // Loops until the player inputs all valid values
+				
+				printf("\n");
+			
+				BOARD[ROW-1][COL-1] = PEG; // Assigns the peg to the board
+				
+				SetAssignment(PEG, ROW, COL, ONE, TWO, THREE, FOUR, FIVE, SIX, T, M, B, L, C, R, &ONEIDX, &TWOIDX, &THREEIDX, &FOURIDX, &FIVEIDX, &SIXIDX);
+				
+				printBoard(BOARD);
+				
+				OCC[OCCINDEX][0] = ROW; // Adds the position coordinates to the set OCC
+				OCC[OCCINDEX][1] = COL;
+				OCCINDEX++; // Increments the index of the occ set
+				
+				PLAYER[TURN].PLAYERPEGS[PLAYER[TURN].PEGINDEX] = PEG; // Adds the position coordinates to the set of the player's occupied positions
+				PLAYER[TURN].PEGINDEX++; // Increments the index of the set of the player's pegs
+				
+				PLAYER[TURN].MOVES++; // Increments the moves of the player
+				TOTALMOVES++; // Increments the total moves in the game
+				
+				if (PLAYER[TURN].MOVES >= 3) // Checks if the player formed a line after finishing their moves
+				{
+					LINEFLAG = LineCheck(&PLAYER[TURN], BOARD); // Returns zero if a line wasn't formed, otherwise return an integer greater than 0
+				}
+				
+				if (LINEFLAG == 15) // If a line was formed and the sum of the player's numbers are equals to 15
+				{
+					RESULT[TURN] = TRUE; // The player wins
+				}
+				
+				if (TOTALMOVES == 9) // If all of the players have filled the board
+				{
+					OVER = TRUE; // The game ends
+					
+					if (RESULT[TURN] == TRUE)
+					{
+						printf("\n\t*****[GAME OVER] PLAYER %c WINS THE GAME*****\n",PLAYER[TURN].NAME);
+					}
+					else if (LINEFLAG < 15 && LINEFLAG > 0) // If a line was formed but the sum of the player's numbers are less than 15
+					{
+						if (PLAYER[TURN].NAME == 'A') // The opponent wins
+						{
+							RESULT[1] = TRUE;
+							printf("\n\t*****[GAME OVER] PLAYER B WINS THE GAME*****\n");
+						}
+						else if (PLAYER[TURN].NAME == 'B')
+						{
+							RESULT[0] = TRUE;
+							printf("\n\t\t*****[GAME OVER] PLAYER A WINS THE GAME*****\n");
+						}
+					}
+					else if (LINEFLAG == 0 || LINEFLAG > 15) // If both players' numbers didn't form a line
+					{
+						printf("\n\t\t*****[GAME OVER] NO PLAYER WON THE GAME: GAME RESTARTING*****\n"); // Restarts the game
+					}
+				}
+					
+				printf("\n------------------------------------------------------------------------\n");
+			}
+		}
+	} while (OVER == FALSE);
+	
+	if (RESULT[0] == TRUE || RESULT[1] == 1) // Returns true if the a player wins the game
+		return TRUE;
+	else
+		return FALSE; // Otherwise, returns falso 
+}
