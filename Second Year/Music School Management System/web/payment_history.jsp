@@ -1,0 +1,192 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page - Music School Management System</title>
+
+    <!-- Add any additional styles if needed -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            /* Explicitly set margin to 0 */
+            padding: 0;
+            background-color: #FCCDFF;
+            /* Pink background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Remove default margin from all elements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Style variables */
+        :root {
+            --admin-background-color: #B46CA8;
+            /* Default background color for the admin section */
+        }
+
+        h2 {
+            margin: 0;
+            /* Set margin to 0 */
+            margin-top: 0;
+            /* Remove top margin */
+            padding: 20px;
+            color: #fff;
+            position: absolute;
+            top: 0;
+            /* Place at the top */
+            background-color: var(--admin-background-color);
+            width: 100%;
+            font-size: 48px;
+            /* Increased font size */
+        }
+
+        /* Style for the buttons */
+        .btn-container {
+            position: relative;
+            margin-top: 200px;
+            /* Adjusted margin to provide space for logos */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 30px;
+            /* Increased padding for a larger button */
+            font-size: 25px;
+            /* Increased font size */
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            color: #fff;
+            background-color: var(--admin-background-color);
+            /* Updated background color to the variable */
+            border: 3px solid white;
+            /* Added border for better visibility */
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin: 0 100px;
+            /* Updated margin for spacing */
+        }
+
+        .btn img {
+            max-width: 500%;
+            /* Adjusted image size */
+            max-height: 500%;
+            /* Adjusted image size */
+            position: absolute;
+            top: -300px;
+            /* Adjusted position to move the image outside the button */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Bottom container with border */
+        .bottom-container {
+            width: 100%;
+            background-color: #B46CA8;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            color: white;
+            /* Set font color to white */
+        }
+
+        .date-time {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #ddd;
+            color: #fff;
+            /* Set the text color to white on hover */
+        }
+
+        /* Center and display buttons horizontally */
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .group-info {
+            font-size: 17px;
+            margin: 0;
+            margin-top: 10px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Payment History Content -->
+    <h2>Payment History</h2>
+
+    <!-- Display current date and time -->
+    <div class="bottom-container">
+        <p class="group-info">CCINFOM - DB Application Group 5</p>
+        <div class="date-time" id="dateTime">
+            <script>
+                function updateDateTime() {
+                    var today = new Date();
+
+                    var daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+                    var dayOfWeek = daysOfWeek[today.getDay()];
+                    var monthName = monthNames[today.getMonth()];
+
+                    var date = dayOfWeek + ', ' + monthName + ' ' + today.getDate() + ', ' + today.getFullYear();
+                    var hours = today.getHours();
+                    var minutes = today.getMinutes();
+                    var seconds = today.getSeconds();
+
+                    // Add leading zeros to minutes and seconds
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                    var ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours % 12;
+                    hours = hours ? hours : 12; // Handle midnight (12:00 AM)
+
+                    var time = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+
+                    document.getElementById('dateTime').innerHTML = date + ' at ' + time + ' GMT+8';
+                }
+
+                setInterval(updateDateTime, 1000); // Update every second
+                updateDateTime(); // Initial call to display immediately
+            </script>
+        </div>
+    </div>
+
+    <!-- Buttons for links to other pages -->
+    <div class="button-container">
+        <div class="btn-container">
+            <a href="filterpayment_pDate.jsp" class="btn">
+                Filter by Date
+            </a>
+        </div>
+        <div class="btn-container">
+            <a href="filterpayment_studID.jsp" class="btn">
+                Filter by Student ID
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>
