@@ -63,13 +63,20 @@ Welcome to my GitHub repository showcasing a collection of machine learning proj
     - Date Handling
     - User Authentication
       
-### Project 5: DSTRU 2
-- **DESCRIPTION:** 
-- **TECHNOLOGY USED:** 
-- **COLLABORATION:** 
-- **YEAR LEVEL:** 
+### Project 5: Board Game
+- **DESCRIPTION:** This project involves developing a strategic board game played on a 7x5 grid where two players, Alpha and Beta, take turns placing their pieces and capturing the opponent’s pieces. The game includes specific sets of cells with different rules for capturing and control. The objective for each player is to either capture all pieces of the opponent from their target set or force the opponent into a position where no valid moves are possible.
+- **TECHNOLOGY USED:** C Language
+- **COLLABORATION:** Group of 3
+- **ROLE:** Translator of of the specifications and Programmer
+- **YEAR LEVEL:** Second Year
   
 - **IMPROVEMENTS:**
+    - Implement a Graphical User Interface (GUI) to enhance the user's experience.
+    - AI Integration
+    - Error Handling
+    - Extended Game Rules
+    - Save/Load Feature
+    - Network Play
 
 ### Project 6: Restaurant Reservation
 - **DESCRIPTION:** 
